@@ -1,0 +1,51 @@
+{
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@empirica/core": "1.11.2",
+    "@livekit/components-react": "^2.3.1",
+    "@livekit/components-styles": "^1.0.12",
+    "@mui/icons-material": "^5.15.19",
+    "@mui/joy": "^5.0.0-beta.36",
+    "@mui/material": "^5.15.19",
+    "canvas-confetti": "^1.9.3",
+    "dotenv": "^16.4.5",
+    "esbuild": "0.17.15",
+    "find-config": "^1.0.0",
+    "livekit-client": "^2.2.0",
+    "livekit-server-sdk": "^2.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-webcam": "^7.2.0",
+    "use-count-up": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@unocss/reset": "^0.51.4",
+    "@vitejs/plugin-react": "4.2.1",
+    "autoprefixer": "10.4.7",
+    "path": "0.12.7",
+    "rollup-plugin-polyfill-node": "^0.13.0",
+    "unocss": "^0.58.5",
+    "vite": "5.1.4",
+    "vite-plugin-restart": "0.4.0"
+  },
+  "name": "face_morph_experiment",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "NODE_ENV=\"development\" vite",
+    "dev:prod": "NODE_ENV=\"production\" vite",
+    "serve": "vite preview"
+  },
+  "type": "module",
+  "version": "0.1.0",
+  "volta": {
+    "node": "20.11.1",
+    "npm": "10.2.4"
+  },
+  "packageManager": "npm@10.7.0",
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}

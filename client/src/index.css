@@ -1,0 +1,265 @@
+:root {
+  --joy-fontWeight-md: 600 !important;
+}
+
+@layer utilities {
+  /* Chrome, Safari, Edge, Opera */
+  input.number-arrows-none::-webkit-outer-spin-button,
+  input.number-arrows-none::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input.number-arrows-none[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+/* Custom CSS */
+img {
+  max-height: 100%;
+}
+
+/* Calibration Camera */
+.calibration_wrapper {
+  overflow: hidden;
+  border-radius: 1em;
+  width: 50rem;
+  height: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.calibration_wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  z-index: 1;
+}
+.calibration_camera {
+  min-height: 50rem;
+  max-width: unset;
+}
+.webcam_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.my_camera_wrapper {
+  width: 15rem;
+  height: 15rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.5rem;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: filter 0.1s;
+}
+.webcam_box svg {
+  position: absolute;
+  color: white;
+  font-size: 3rem;
+  opacity: 0.3;
+  top: calc(50% - 1rem);
+  left: calc(50% - 1.5rem);
+  opacity: 0;
+}
+.my_camera_wrapper:hover {
+  filter: brightness(0.5);
+}
+.my_camera_wrapper.disabled {
+  filter: brightness(0.3) blur(1rem);
+}
+.my_camera_wrapper.disabled + svg,.my_camera_wrapper:hover + svg  {
+  opacity: 0.5;
+}
+.my_camera_wrapper {
+  width: 15rem;
+  height: 15rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.5rem;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.my_camera {
+  height: 100%;
+  max-width: unset;
+}
+
+/* Feedback Buttons */
+.thumbdown_container, .thumbup_container {
+  position: relative;
+  cursor: pointer;
+}
+.thumbdown_container {
+  background: rgb(246, 76, 76);
+  border-radius: 100%;
+  padding: 1em;
+}
+.thumbdown_container path, .thumbup_container path {
+  color: white;
+}
+.thumbup_container {
+  background: rgb(76, 133, 246);
+  border-radius: 100%;
+  padding: 1em;
+}
+
+.feedback_btns .MuiSvgIcon-root {
+  cursor: pointer;
+  transition: all 0.5s;
+  font-size: 3.5em;
+}
+.feedback_btns .MuiSvgIcon-root:hover {
+  color: #000;
+}
+.feedback_btns .thumbdown_container:hover .MuiSvgIcon-root, .feedback_btns .thumbup_container:hover .MuiSvgIcon-root {
+  transform: scale(1.2);
+}
+.feedback_btns .thumbdown_container:hover {
+  background: rgb(203, 57, 57);
+}
+.feedback_btns .thumbup_container:hover {
+  background: rgb(56, 101, 192);
+}
+
+
+/* Animated circle border thingy */
+.thumbdown_container svg.circleContainer, .thumbup_container svg.circleContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scale(1.3);
+}
+.another-circle {
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+}
+.another-circle {
+  stroke-dasharray: 227;
+  stroke-dashoffset: 227;
+  transition: stroke-dashoffset 0.4s ease-out;
+}
+.another-circle.grow {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 2s linear;
+}
+
+/* Confetti! */
+.videoContainer {
+  position: relative;
+}
+.videoContainer canvas {
+  position: absolute;
+  z-index:1;
+  top: 0;
+  left: 0;
+  background: none;
+  width: 50%;
+  height: 100%;
+}
+#right-canvas {
+  left: 50%;
+}
+
+/* LiveKit */
+video {
+  max-height: 39rem;
+}
+.lk-participant-metadata {
+  display: none;
+}
+
+/* Next Btn */
+.nextBtn {
+  padding: 2em;
+}
+
+/* behind the scenes container */
+.secretContainer {
+  border: dotted 3px rgb(217, 223, 236);
+  border-radius: 3em;
+  padding: 3em;
+}
+
+/* DEMO */
+span.caps {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 2.5rem;
+  padding-top: 5rem;
+  opacity: 0.5;
+  font-weight: 100;
+}
+button.MuiButton-root {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  /* font-weight: 100; */
+  font-weight: 400;
+  color: rgb(203, 211, 225);
+  /* border-radius: 1rem; */
+}
+button.MuiButton-root:hover {
+  background-color: #2d343d;
+  /* border-radius: 1rem; */
+}
+button.active, button.MuiButton-root:active {
+  background-color: #2d343d;
+  color: #fff;
+  box-shadow: 0px 8px 35px -5px rgba(81, 115, 159, 0.65);
+}
+:root {
+  --variant-solidColor: rgb(231, 232, 239);
+  --variant-solidBg: rgb(39, 39, 39);
+  --variant-solidHoverBg: rgb(47, 47, 88);
+  /* --variant-solidActiveBg: rgb(35, 35, 68); */
+  /* --Radio-size: 5rem !important; */
+}
+.MuiRadio-root {
+  --Radio-size: 3rem !important;
+}
+.MuiRadio-label {
+  font-size: 1.5em;
+}
+
+/* Video */
+.lk-room-container {
+  overflow: hidden;
+  display: flex;
+  background: none;
+  justify-content: center;
+}
+.singleVideoContainer:first-child {
+  flex-direction: row;
+}
+.singleVideoContainer {
+  width: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  width: 40em;
+  height: 30em;
+  flex-shrink: 0;
+  /* margin-top: 20rem; */
+  border-radius: 0.5rem;
+}
+.lk-participant-media-video {
+  object-position: 100%;
+}
+.lk-room-container .singleVideoContainer:first-child .lk-participant-media-video {
+  object-position: 0%;
+}
