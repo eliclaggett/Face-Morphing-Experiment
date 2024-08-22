@@ -1,0 +1,39 @@
+.verticalProgress {
+    height: auto;
+    display: flex;
+    gap: 0.25em;
+    width: 3.5rem;
+    flex-shrink: 0;
+    
+}
+
+.verticalProgress .MuiLinearProgress-root {
+    width: 0.5em;
+    height: 100%;
+    justify-content: center;
+    align-items: flex-end;
+    border-radius:5px;
+    overflow: hidden;
+}
+.verticalProgress .MuiLinearProgress-root::before {
+    position: relative;
+    width: 100%;
+    inline-size: 100%;
+    left: 0;
+}
+
+.MuiLinearProgress-root.like::before {
+    background: linear-gradient(0deg, rgb(0 55 97) 0%, rgb(79 255 251) 20em);
+}
+.MuiLinearProgress-root.dislike::before {
+    background: linear-gradient(0deg, rgb(97 0 0) 0%, rgb(255 79 79) 20em);
+}
+.verticalProgress .singleBar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+}
+.verticalProgress svg {
+    opacity: 0.6;
+}

@@ -1,0 +1,97 @@
+/* Like Button */
+.likeBtnContainer, .dislikeBtnContainer {
+    /* background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%); */
+    /* background-image: linear-gradient(90deg, rgba(194,7,7,1) 0%, rgba(255,96,0,1) 25%, rgba(255,211,0,1) 50%, rgba(255,96,0,1) 75%, rgba(194,7,7,1) 100%); */
+    /* background: linear-gradient(90deg, rgba(7,22,194,1) 0%, rgba(0,157,255,1) 25%, rgba(0,251,255,1) 50%, rgba(0,157,255,1) 75%, rgba(7,22,194,1) 100%); */
+    background: #6f6f6f;
+    padding: 2px;
+    border-radius: 6px;
+    display: inline-flex;
+    width: 7rem;
+    flex: 0;
+  }
+  
+  .likeBtnContainer:hover {
+    background: linear-gradient(90deg, #fff 0%, #fff 50%, rgba(0,157,255,1) 05%, rgba(0,157,255,1));
+    background-size: 200%;
+  }
+  
+  .dislikeBtnContainer:hover {
+    background: linear-gradient(90deg, #fff 0%, #fff 50%, rgb(212, 0, 0) 05%, rgb(212, 0, 0));
+    background-size: 200%;
+  }
+  
+  .likeBtnContainer:active {
+    /* background: blue; */
+    transform: scale(1.1);
+    transition: background 3s, transform 3s;
+    animation:slidebgonce 3s linear forwards;
+    animation-iteration-count: 1;
+  }
+  .likeBtnContainer.held:active {
+    background: linear-gradient(90deg, rgba(7,22,194,1) 0%, rgba(0,157,255,1) 25%, rgba(0,251,255,1) 50%, rgba(0,157,255,1) 75%, rgba(7,22,194,1) 100%);
+    box-shadow: 0px 0px 15px rgb(86, 105, 248), 0 0 2px rgba(0,251,255,1);
+    animation: slidebg 10s linear;
+    animation-iteration-count: infinite !important;
+  }
+  .likeBtnContainer:active svg {
+    animation: tilt-shaking 0.5s infinite;
+  }
+  button.MuiButton-root.likeBtn, button.MuiButton-root.dislikeBtn {
+    content:attr(alt);
+    background:#000 !important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width: 100%;
+    position: relative;
+    overflow: visible;
+    padding: 0 2em;
+  }
+  .likeBtn::after, .dislikeBtn::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    /* background: pink; */
+    border-radius: 0.5em;
+    position: absolute;
+    box-sizing: content-box;
+  }
+  .likeBtnContainer.held .likeBtn::after, .dislikeBtnContainer.held .dislikeBtn::after {
+    animation: ripples 1s;
+  }
+  .likeBtn::after {
+    border-color: rgba(0,157,255,1) !important;
+  }
+  .dislikeBtn::after {
+    border-color: rgba(194,7,7,1) !important;
+  }
+  @keyframes tilt-shaking {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(0eg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+@keyframes slidebgonce {
+    to {
+      background-position:-100%;
+    }
+}
+  
+@keyframes slidebg {
+    to {
+      background-position: 20vw;
+    }
+}
+
+@keyframes ripples {
+  0% {
+    border: 0px solid transparent;
+  }
+  100% {
+    border: 1em solid;
+    opacity: 0
+  }
+}

@@ -57,6 +57,7 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       preserveEntrySignatures: "strict",
+      external: ['@empirica/core'],
       plugins: [builtinsPlugin],
       output: {
         sourcemap: true,

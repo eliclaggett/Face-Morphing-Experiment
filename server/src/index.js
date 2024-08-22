@@ -18,8 +18,8 @@ const argv = minimist(process.argv.slice(2), { string: ["token"] });
 setLogLevel(argv["loglevel"] || "info");
 
 let dotEnvPath = null;
-if (fs.existsSync('/home/ubuntu/eli')) {
-  dotEnvPath = findConfig('.env', {cwd: '/home/ubuntu/eli/experiment/face-morph'});
+if (fs.existsSync('/home/ubuntu')) {
+  dotEnvPath = findConfig('.env', {cwd: '/home/ubuntu/Code'});
 } else if (fs.existsSync('/Users/eclagget/Code/experiment/face-morph')) {
   dotEnvPath = findConfig('.env', {cwd: '/Users/eclagget/Code/experiment/face-morph'});
 }

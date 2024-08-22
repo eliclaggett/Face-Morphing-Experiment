@@ -1,0 +1,124 @@
+unused<Stack width='100%'>
+                <Typography level="title-lg" sx={{fontSize: '2em', pt: 6}}>2)&emsp;Review your ratings</Typography>
+            </Stack>
+            <Stack sx={{width: '100%', flex: 1, gap: 2}}>
+                {/* <Typography level="title-lg" sx={{fontSize: '2em'}}>You</Typography> */}
+                <Typography level="body-md">This is the individual you liked most:</Typography>
+                <Card variant="outlined">
+                    <CardContent>
+                    <Avatar alt="Hatsune Miku" src="/images/avatar/miku.png" />
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={95} className='likeLinear'/><span>+95%</span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={0} className='dislikeLinear'/><span></span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+                {/* <Card variant="outlined">
+                    <CardContent>
+                    <Avatar alt="Hatsune Miku" src="/images/avatar/miku.png" />
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={85} className='likeLinear'/><span>+85%</span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={0} className='dislikeLinear'/><span></span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+                <Card variant="outlined">
+                    <CardContent>
+                    <Avatar alt="Hatsune Miku" src="/images/avatar/miku.png" />
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={45} className='likeLinear'/><span>+45%</span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={0} className='dislikeLinear'/><span></span></div>
+                    </Stack>
+                    </CardContent>
+                </Card> */}
+
+                <Typography level="body-md">This is the individual you liked least:</Typography>
+                
+                <Card variant="outlined">
+                    <CardContent>
+                    <Avatar alt="Hatsune Miku" src="/images/avatar/miku.png" />
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={0} className='likeLinear'/><span></span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={20} className='dislikeLinear'/><span>-20%</span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+                {/* <Card variant="outlined">
+                    <CardContent>
+                    <Avatar alt="Hatsune Miku" src="/images/avatar/miku.png" />
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={0} className='likeLinear'/><span></span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={50} className='dislikeLinear'/><span>-50%</span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+                <Card variant="outlined">
+                    <CardContent>
+                    <Avatar alt="Hatsune Miku" src="/images/avatar/miku.png" />
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={0} className='likeLinear'/><span></span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={95} className='dislikeLinear'/><span>-95%</span></div>
+                    </Stack>
+                    </CardContent>
+                </Card> */}
+            </Stack>
+            <Stack sx={{width: '50%', flex: 1, gap: 2}} className='others hidden'>
+            {/* <Typography level="title-lg" sx={{fontSize: '2em'}}>Others</Typography> */}
+            <Typography level="body-md">This is how others rated your top picks:</Typography>
+                <Card variant="outlined">
+                    <CardContent>
+                    
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={85} className='likeLinear'/><span>+85%</span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={25} className='dislikeLinear'/><span></span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+                <Card variant="outlined">
+                    <CardContent>
+                    
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={75} className='likeLinear'/><span>+75%</span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={35} className='dislikeLinear'/><span></span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+                <Card variant="outlined">
+                    <CardContent>
+                    
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={65} className='likeLinear'/><span>+65%</span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={47} className='dislikeLinear'/><span></span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+
+                <Typography level="body-md">This is how others rated your bottom picks:</Typography>
+                <Card variant="outlined">
+                    <CardContent>
+                    
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={50} className='likeLinear'/><span></span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={55} className='dislikeLinear'/><span>-55%</span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+                <Card variant="outlined">
+                    <CardContent>
+                    
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={45} className='likeLinear'/><span></span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={65} className='dislikeLinear'/><span>-65%</span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+                <Card variant="outlined">
+                    <CardContent>
+                    
+                    <Stack className='horizontalRatings'>
+                        <div className='singleBar'><ThumbUpAlt/><LinearProgress determinate={true} value={25} className='likeLinear'/><span></span></div>
+                        <div className='singleBar'><ThumbDownAlt/><LinearProgress determinate={true} value={70} className='dislikeLinear'/><span>-70%</span></div>
+                    </Stack>
+                    </CardContent>
+                </Card>
+            </Stack>

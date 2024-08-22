@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "@empirica/core": "1.11.2",
+    "@empirica/core": "^1.11.5",
+    "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "find-config": "^1.0.0",
     "livekit-server-sdk": "^2.3.0",
