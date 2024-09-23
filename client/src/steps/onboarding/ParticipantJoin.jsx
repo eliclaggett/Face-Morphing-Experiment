@@ -17,7 +17,14 @@ export default function ParticipantJoin({ onPlayerID, connecting }) {
     const urlParams = new URLSearchParams(queryString);
     const sessionIdFromURL = urlParams.get('SESSION_ID');
     const studyIdFromURL = urlParams.get('STUDY_ID');
+    const prolificIdFromURL = urlParams.get('PROLIFIC_PID');
     const [playerID, setPlayerID] = useState('');
+
+    useEffect(() => {
+        if (prolificIdFromURL) {
+            onPlayerID(prolificIdFromURL);
+        }
+    }, []);
 
     // Logic to handle interactions with this page
     const  handleSubmit = (evt) => {

@@ -33,7 +33,7 @@ export default function Tutorial({ next }) {
     const [likeAmt, setLikeAmt] = useState(0);
     const [dislikeAmt, setDislikeAmt] = useState(0);
     const [btnTxt, setButtonText] = useState('Next');
-    const [alertDisplay, setAlertDisplay] = useState('hiddenn');
+    const [alertDisplay, setAlertDisplay] = useState('hidden');
 
     function shuffleArray(array) {
         // Citation: https://stackoverflow.com/questions/2450954
@@ -135,9 +135,11 @@ export default function Tutorial({ next }) {
         if (likeAmt > 90 || dislikeAmt > 90) {
             setButtonText('Continue');
             setAlertDisplay('');
+            setErrorDisplay('hidden');
         } else {
             setButtonText('Next');
             setAlertDisplay('hidden');
+            setErrorDisplay('');
         }
 
     }, [likeAmt, dislikeAmt]);
@@ -326,6 +328,14 @@ export default function Tutorial({ next }) {
                                 className={alertDisplay}
                             >
                                 Good job! That's how you provide the strongest rating to an individual. Now, we can continue to the study.
+                        </Alert>
+                        <Alert
+                                startDecorator={<WarningIcon />}
+                                variant="outlined"
+                                color="danger"
+                                className={errorDisplay}
+                            >
+                                Please try holding longer until the button is fully colored.
                         </Alert>
                         </Stack>;
     }

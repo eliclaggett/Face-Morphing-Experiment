@@ -68,8 +68,7 @@ export default function ConsentForm({ next }) {
                     Consent Form
                 </Typography>
                 <strong>
-                    Please read the following information. When you give your consent, you
-                    can proceed to the study.
+                    Please read the following information and provide consent before continuing. <span style={{color: 'white'}}>This study uses your webcam. When access is requested, please click "Allow".</span>
                 </strong>
                 <Card variant="soft" sx={{ maxHeight: '30em', overflow: 'scroll', p: 4, my: 2 }}>
                     <Typography level='body-md'>This is a research study conducted by Sony Computer Science Laboratories and is funded by the Japan Science and Technology Agency (JST).</Typography>

@@ -1,5 +1,5 @@
 function formatMoney(val) {
-    return Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
+    return Intl.NumberFormat('en-US', { style: 'currency', currency: 'GBP' }).format(val);
 }
 function msToTime(duration) {
     if (duration == null) { return ''; }

@@ -27,10 +27,10 @@ const gameParams = {
   version: 'July 2024',
   videoLength: 20, // seconds
   numVideos: 6,
-  studyPay: 3,
+  studyPay: 2.4,
   partialPay: 1,
   studyLength: '10 minutes',
-  completionCode: 'TESTCODE',
+  completionCode: 'C19BSZ93',
   livekitURL: 'wss://facemorphing-pse030ak.livekit.cloud',
 
 

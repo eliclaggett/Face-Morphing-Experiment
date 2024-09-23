@@ -46,12 +46,12 @@ export default function End({next}) {
 
                 <Stack alignItems={'center'}>
                 <Typography level="body-md" sx={{pb: 2}}>You may now close this window.</Typography>
-                {/* <Typography level="body-md" sx={{pb: 2}}>You may now close this window. Your total pay for this study is:</Typography>
+                <Typography level="body-md" sx={{pb: 2}}>You may now close this window. Your total pay for this study is:</Typography>
                 <Typography level="h2" sx={{pb: 2}}>{formatMoney(gameParams.studyPay)}</Typography>
 
                 <Typography level="body-md" sx={{pb: 2}}>Please use this completion code for your submission:</Typography>
 
-                <Typography level="h2" sx={{pb: 2}}>{gameParams.completionCode}</Typography> */}
+                <Typography level="h2" sx={{pb: 2}}>{gameParams.completionCode}</Typography>
                 </Stack> 
                 <Typography level="body-md" sx={{pb: 2}}>
                 If you have extra time, please tell us about your experience participating in the study and list any feedback here, too.
