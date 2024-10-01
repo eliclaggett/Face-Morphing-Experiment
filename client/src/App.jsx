@@ -116,6 +116,7 @@ export default function App() {
   
     // Automatically reconnect if the connection is lost
     window.nlpServer.onclose = () => {
+      console.log('Connection to Python server closed');
       // TODO: Uncomment for production
       // TimerMixin.setTimeout(() => {
       //   connectToNLP();
@@ -143,6 +144,8 @@ export default function App() {
       // CalibrateTracking,
       // WatchVideos,
       // VideoRanking,
+      // Tutorial,
+      // DevStep,
 
       // Real steps
       Recaptcha,

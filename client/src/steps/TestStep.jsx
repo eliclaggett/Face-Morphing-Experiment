@@ -6,7 +6,8 @@
  * This ReactJS file is a test step of the experiment's multiple API connections
  */
 import React, { useEffect, useState, useRef } from 'react';
-import { Container, Typography, Stack, Button, Card } from '@mui/joy';
+import { Container, Typography, Stack, Button, Card, Alert } from '@mui/joy';
+import WarningIcon from '@mui/icons-material/Warning';
 import { usePlayer } from "@empirica/core/player/classic/react";
 import { wsSend } from '../utils/utils.js';
 import '@livekit/components-styles';
@@ -46,6 +47,7 @@ export default function TestStep({ next }) {
     const [networkIcon, setNetworkIcon] = useState(<Help/>);
     const [server1Icon, setServer1Icon] = useState(<Help/>);
     const [server2Icon, setServer2Icon] = useState(<Help/>);
+    const [alertDisplay, setAlertDisplay] = useState('hidden');
 
 
     function collectTestResults() { wsSend(JSON.stringify({'command': 'collectTestResults'})); }
@@ -107,6 +109,7 @@ export default function TestStep({ next }) {
             setServer2Icon(<Help/>);
             wsSend(JSON.stringify({'command': 'testConnection'}));
             TimerMixin.setTimeout(collectTestResults, 9 * 1000);
+            TimerMixin.setTimeout(() => { setAlertDisplay('') }, 25 * 1000);
         }
     }
     function setHasUserMedia() {
@@ -141,8 +144,16 @@ export default function TestStep({ next }) {
                 </Typography>
                 <Typography level="body-md">
                     Please allow us to test that all systems are operational before continuing with this study.
-                    <br/>This will take about ten seconds.
+                    <br/>This will take about ten seconds. If you encounter any errors, please try refreshing the page.
                 </Typography>
+                <Alert
+                                startDecorator={<WarningIcon />}
+                                variant="outlined"
+                                color="warning"
+                                className={alertDisplay}
+                            >
+                                If there are still unresolved errors, please contact us and cancel your participation in this study.
+                        </Alert>
                 <Stack direction="row" className="systemCheck" sx={{py: 15}}>
                     <Card className='statusCamera'>
                         {cameraIcon}

@@ -33,7 +33,7 @@ export default function Tutorial({ next }) {
     const [likeAmt, setLikeAmt] = useState(0);
     const [dislikeAmt, setDislikeAmt] = useState(0);
     const [btnTxt, setButtonText] = useState('Next');
-    const [alertDisplay, setAlertDisplay] = useState('hidden');
+    const [alertDisplay, setAlertDisplay] = useState('none');
 
     function shuffleArray(array) {
         // Citation: https://stackoverflow.com/questions/2450954
@@ -115,6 +115,10 @@ export default function Tutorial({ next }) {
     }
 
     function handleBack() {
+        setErrorDisplay('none');
+        setQ4SuccessDisplay('none');
+        setAlertDisplay('none');
+    
         if (step > 1) { setStep(step-1); }
         if (step == 2) { setBackButtonDisabled(true); }
 
@@ -135,16 +139,20 @@ export default function Tutorial({ next }) {
         if (likeAmt > 90 || dislikeAmt > 90) {
             setButtonText('Continue');
             setAlertDisplay('');
-            setErrorDisplay('hidden');
+            setErrorDisplay('none');
         } else {
             setButtonText('Next');
-            setAlertDisplay('hidden');
+            setAlertDisplay('none');
             setErrorDisplay('');
         }
 
     }, [likeAmt, dislikeAmt]);
 
     function handleNext() {
+        setErrorDisplay('none');
+        setQ4SuccessDisplay('none');
+        setAlertDisplay('none');
+
         if (radioButtonVals && radioButtonVals['q'+(step+1)] == correctAnswers[step]) {
             setNextButtonDisabled(false);
         } else {
@@ -325,7 +333,7 @@ export default function Tutorial({ next }) {
                                 startDecorator={<Done />}
                                 variant="outlined"
                                 color="success"
-                                className={alertDisplay}
+                                sx={{display: alertDisplay}}
                             >
                                 Good job! That's how you provide the strongest rating to an individual. Now, we can continue to the study.
                         </Alert>
@@ -333,7 +341,7 @@ export default function Tutorial({ next }) {
                                 startDecorator={<WarningIcon />}
                                 variant="outlined"
                                 color="danger"
-                                className={errorDisplay}
+                                sx={{display: errorDisplay}}
                             >
                                 Please try holding longer until the button is fully colored.
                         </Alert>
@@ -367,7 +375,7 @@ export default function Tutorial({ next }) {
                         startDecorator={<WarningIcon />}
                         variant="outlined"
                         color="danger"
-                        sx={{ display: errorDisplay }}
+                        sx={{ display: step != 5 ? errorDisplay : 'none' }}
                     >
                         Oops, that's not right. Please try again.
                 </Alert>

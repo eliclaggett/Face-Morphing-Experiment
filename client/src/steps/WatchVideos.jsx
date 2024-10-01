@@ -160,11 +160,6 @@ export default function WatchVideos({ next }) {
       document.querySelector('#webgazerFaceFeedbackBox').remove();
     }
 
-    // timerInterval = TimerMixin.setInterval(() => {setLoadingTimer(loadingTimer-1);}, 1000);
-    // wsSend(JSON.stringify({'command': 'setVideoParams', 'video': videoIdx, 'swap_idx': Math.round(Math.random()), 'morphing_level': Math.floor(Math.random() * 3 % 3)}));
-    // handleNextVideo();
-    // setVideoIdx(videoIdx+1);
-
     return () => {
       clearInterval(intervalRef.current); // playbackFunc
       TimerMixin.clearInterval(timerInterval);
@@ -225,12 +220,32 @@ export default function WatchVideos({ next }) {
     // Request next video
     wsSend(JSON.stringify({'command': 'getLastVectorDistance'}));
     wsSend(JSON.stringify({'command': 'pauseVideo'}));
-    wsSend(JSON.stringify({'command': 'setVideoParams', 'video': randomizedVideos[videoIdx], 'video_idx': videoIdx, 'swap_idx': randomizedMorphingLR[videoIdx], 'morphing_level': randomizedMorphingLevel[videoIdx], 'output_order': randomizedDisplayLR[videoIdx]}));
-    player.set('videoWatchTimes', [...videoWatchTimes, {'idx': videoIdx, 'ts': (new Date()).getTime()}]);
-    if (videoIdx == 6) {
+
+    if (videoIdx >= gameParams.numVideos) {
       player.set('finishedWatching', true);
       player.set('studyStep', 'survey');
+      return;
     }
+
+    const convo_id = randomizedVideos[videoIdx].slice(randomizedVideos[videoIdx].indexOf('/')+1, -4);
+    console.log(convo_id)
+    let swappedGender = gameParams['video_genders'][convo_id][randomizedMorphingLR[videoIdx]]
+    
+    let useActor = 0;
+    useActor = swappedGender == 'male' ? 2 : 1;
+    let morphingLevel = randomizedMorphingLevel[videoIdx];
+    if (morphingLevel == 1) { morphingLevel = 3; }
+
+    wsSend(JSON.stringify({
+      'command': 'setVideoParams',
+      'video': randomizedVideos[videoIdx],
+      'video_idx': videoIdx,
+      'swap_idx': randomizedMorphingLR[videoIdx],
+      'morphing_level': morphingLevel,
+      'output_order': randomizedDisplayLR[videoIdx],
+      'use_actor': useActor
+    }));
+    player.set('videoWatchTimes', [...videoWatchTimes, {'idx': videoIdx, 'ts': (new Date()).getTime()}]);
   }
 
   useEffect(() => {
