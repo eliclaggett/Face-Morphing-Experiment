@@ -1,15 +1,16 @@
-# Facial Familiarity Bias
+# Measuring the Impact of Face Morphing on Social Outcomes
 
-An experimental study of intergroup bias in video communication.
+Platform for running social experiments that measure participants' affinity and attention toward strangers in a video call scenario. The strangers' faces are morphed to varying degrees, concealing their identity and altering facial characteristics while preserving their original facial expressions.
 
-## Getting Started
+The provided code is a companion to ongoing research conducted with Sony Computer Science Laboratories. Significant portions of code have been redacted as per company policy.
 
-### Dependencies
+### Prerequisites
 
-* Empirica v1.11.2
-* TouchDesigner v2023.11340
+- Python
+- Empirica (empirica.ly)
+- TouchDesigner v2023.11340
 
-### Installing
+### Installation
 
 Make sure to install the NPM packages in the client and server directories before running the experiment for the first time.
 
