@@ -9,8 +9,8 @@ import { info, setLogLevel } from "@empirica/core/console";
 import minimist from "minimist";
 import process from "process";
 import { Empirica } from "./callbacks";
-import * as fs from 'fs';
-import dotenv from 'dotenv';
+import * as fs from "fs";
+import dotenv from "dotenv";
 import findConfig from "find-config";
 
 const argv = minimist(process.argv.slice(2), { string: ["token"] });
@@ -18,25 +18,28 @@ const argv = minimist(process.argv.slice(2), { string: ["token"] });
 setLogLevel(argv["loglevel"] || "info");
 
 let dotEnvPath = null;
-if (fs.existsSync('/home/ubuntu')) {
-  dotEnvPath = findConfig('.env', {cwd: '/home/ubuntu/Code'});
-} else if (fs.existsSync('/Users/eclagget/Code/experiment/face-morph')) {
-  dotEnvPath = findConfig('.env', {cwd: '/Users/eclagget/Code/experiment/face-morph'});
+if (fs.existsSync("/home/ubuntu")) {
+  dotEnvPath = findConfig(".env", { cwd: "/home/ubuntu/Code" });
+} else if (fs.existsSync("/Users/eclagget/Code/experiment/face-morph")) {
+  dotEnvPath = findConfig(".env", {
+    cwd: "/Users/eclagget/Code/experiment/face-morph",
+  });
 }
 
 if (dotEnvPath) {
-  console.log('Loading dotenv file!');
+  console.log("Loading dotenv file!");
   const envFile = dotenv.parse(fs.readFileSync(dotEnvPath));
   for (const key of Object.keys(envFile)) {
     process.env[key] = envFile[key];
   }
 } else {
-  console.log('Warning: No dotenv file!');
+  console.log("Warning: No dotenv file!");
 }
 
-const websocketURL = process.env['DEPLOYMENT'] == 'prod' ?
-  "http://localhost:"+process.env['PORT_EMPIRICA']+"/query" :
-  "http://localhost:"+process.env['PORT_EMPIRICA']+"/query";
+const websocketURL =
+  process.env["DEPLOYMENT"] == "prod"
+    ? "http://localhost:" + process.env["PORT_EMPIRICA"] + "/query"
+    : "http://localhost:" + process.env["PORT_EMPIRICA"] + "/query";
 
 (async () => {
   const ctx = await AdminContext.init(

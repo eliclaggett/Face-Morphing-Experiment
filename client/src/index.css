@@ -385,6 +385,31 @@ iframe {
   display: flex;
   background: none;
   justify-content: center;
+  min-width: 1000px;
+}
+@media screen and (max-width: 1090px) {
+  .lk-room-container {
+    transform: scale(0.8);
+    min-width: 0;
+    overflow: visible;
+  }
+  .ratingUI {
+    transform: scale(0.8);
+  }
+}
+@media screen and (max-width: 750px) {
+  .lk-room-container {
+    transform: scale(0.6);
+    min-width: 0;
+    overflow: visible;
+  }
+}
+@media screen and (max-width: 530px) {
+  .lk-room-container {
+    transform: scale(0.5);
+    min-width: 0;
+    overflow: visible;
+  }
 }
 .singleVideoContainer:first-child {
   flex-direction: row;
@@ -401,6 +426,7 @@ iframe {
   border-radius: 0.5rem;
   aspect-ratio: 1.3;
   position: relative;
+  min-width: 255px;
 }
 .lk-participant-media-video {
   object-position: 100%;
