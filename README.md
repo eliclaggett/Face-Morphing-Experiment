@@ -49,14 +49,11 @@ There is no single executable for this web application, so please follow install
 ## Authors
 
 <p align="center">
-  <span style="display: inline-flex; flex-direction: column; justify-content: center; align-items: center; margin-right: 5em;">
-    <img src="https://raw.githubusercontent.com/eliclaggett/Face-Morphing-Experiment/refs/heads/main/assets/eli.png" width="80" />
+    <img src="https://raw.githubusercontent.com/eliclaggett/Face-Morphing-Experiment/refs/heads/main/assets/eli.png" width="80" valign="middle"/>
     <strong>Eli Claggett</strong>
-  </span>
-  <span style="display: inline-flex; flex-direction: column; justify-content: center; align-items: center;">
-    <img src="https://raw.githubusercontent.com/eliclaggett/Face-Morphing-Experiment/refs/heads/main/assets/shun.png" width="80" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://raw.githubusercontent.com/eliclaggett/Face-Morphing-Experiment/refs/heads/main/assets/shun.png" width="80" valign="middle"/>
     <strong>Shunichi Kasahara</strong>
-  </span>
 </p>
 
 ## License
