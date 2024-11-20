@@ -49,12 +49,12 @@ There is no single executable for this web application, so please follow install
 ## Authors
 
 <p align="center">
-  <span>
-    <img src="/img1.png" width="100" />
+  <span style="display: inline-flex; flex-direction: column; justify-content: center; align-items: center; margin-right: 5em;">
+    <img src="https://raw.githubusercontent.com/eliclaggett/Face-Morphing-Experiment/refs/heads/main/assets/eli.png" width="80" />
     <strong>Eli Claggett</strong>
   </span>
-  <span>
-    <img src="/img1.png" width="100" />
+  <span style="display: inline-flex; flex-direction: column; justify-content: center; align-items: center;">
+    <img src="https://raw.githubusercontent.com/eliclaggett/Face-Morphing-Experiment/refs/heads/main/assets/shun.png" width="80" />
     <strong>Shunichi Kasahara</strong>
   </span>
 </p>
