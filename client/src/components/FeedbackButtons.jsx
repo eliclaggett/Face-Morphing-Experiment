@@ -13,7 +13,6 @@ export default function FeedbackButtons({}) {
     el.classList.add("grow");
     const posEmotion = el.closest(".thumbup_container") ? true : false;
     const direction = el.closest(".leftButtons") ? "left" : "right";
-    console.log(posEmotion);
 
     const leftCanvas = document.getElementById("left-canvas");
     const rightCanvas = document.getElementById("right-canvas");

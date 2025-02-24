@@ -62,7 +62,6 @@ export default function InitialSurvey({ next }) {
   function handleRosenbergChange(ev) {
     let tmpRosenbergValues = { ...rosenbergValues };
     tmpRosenbergValues[ev.target.name.slice(-1)] = ev.target.value;
-    console.log(Object.keys(tmpRosenbergValues).length);
     setRosenbergValues(tmpRosenbergValues);
   }
 

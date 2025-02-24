@@ -43,13 +43,20 @@ export default function WatchVideos({ next }) {
   const player = usePlayer();
   const game = useGame();
   const gameParams = game.get("gameParams");
+  const gender = player.get('gender');
 
+
+  const trialDt = player.get('trialDt');
   const randomizedVideos = player.get("randomizedVideos");
   const randomizedMorphingLevel = player.get("randomizedMorphingLevel");
   const randomizedMorphingLR = player.get("randomizedMorphingLR");
   const randomizedDisplayLR = player.get("randomizedDisplayLR");
   const videoReactions = player.get("videoReactions");
   const videoWatchTimes = player.get("videoWatchTimes") || [];
+
+  // const matchedFace = (gender == 'male') ? gameParams['maleFaces'][gameParams['faceIdx']['male']] : gameParams['femaleFaces'][gameParams['faceIdx']['female']];
+  
+  // const matchedFace = '2024-12-18_18-25-19.jpg';
 
   const requiredWatchTime = gameParams?.videoLength
     ? gameParams.videoLength
@@ -87,7 +94,7 @@ export default function WatchVideos({ next }) {
     }
 
     if (data.distance) {
-      player.set("vectorDistances", [...vectorDistances, data.distance]);
+      player.set("vectorDistances", [...vectorDistances, {distance: data.distance, videoIdx: videoIdx-1}]);
     }
   };
 
@@ -161,6 +168,8 @@ export default function WatchVideos({ next }) {
       document.querySelector("#webgazerFaceFeedbackBox").remove();
     }
 
+    // player.set('matchedFace', matchedFace);
+
     return () => {
       clearInterval(intervalRef.current); // playbackFunc
       TimerMixin.clearInterval(timerInterval);
@@ -174,12 +183,12 @@ export default function WatchVideos({ next }) {
   function handleReplay() {
     clear();
     if (window.nlpServer) {
-      wsSend(JSON.stringify({ command: "restartVideo" }));
+      wsSend(JSON.stringify({ command: "restartVideo", trialDt: trialDt }));
     }
 
     setProgressValue(0);
     window.videoStartTime = new Date().getTime();
-    player.set("videoStartTime", new Date().getTime());
+    player.set("videoStartTime", {dt: (new Date()).getTime(), videoIdx: videoIdx});
   }
 
   function handleShowHideWebcam() {
@@ -228,8 +237,8 @@ export default function WatchVideos({ next }) {
     document.querySelector(".nextVideo").classList.add("hidden");
 
     // Request next video
-    wsSend(JSON.stringify({ command: "getLastVectorDistance" }));
-    wsSend(JSON.stringify({ command: "pauseVideo" }));
+    wsSend(JSON.stringify({ command: "getLastVectorDistance", trialDt: trialDt,  }));
+    wsSend(JSON.stringify({ command: "pauseVideo", trialDt: trialDt }));
 
     if (videoIdx >= gameParams.numVideos) {
       player.set("finishedWatching", true);
@@ -241,7 +250,6 @@ export default function WatchVideos({ next }) {
       randomizedVideos[videoIdx].indexOf("/") + 1,
       -4
     );
-    console.log(convo_id);
     let swappedGender =
       gameParams["video_genders"][convo_id][randomizedMorphingLR[videoIdx]];
 
@@ -260,7 +268,8 @@ export default function WatchVideos({ next }) {
         swap_idx: randomizedMorphingLR[videoIdx],
         morphing_level: morphingLevel,
         output_order: randomizedDisplayLR[videoIdx],
-        use_actor: useActor,
+        // use_face: matchedFace, // Only used for "other" condition
+        use_actor: 0, // 0=use participant's webcam
       })
     );
     player.set("videoWatchTimes", [
@@ -289,10 +298,10 @@ export default function WatchVideos({ next }) {
   }
 
   function handleLivekitConnected() {
-    console.log("livekit connected");
+    console.log("Livekit connected");
   }
   function handleLivekitError(err) {
-    console.log("livekit error");
+    console.log("Livekit error");
     console.log(err);
   }
   function setHolding(name, val) {
@@ -313,15 +322,15 @@ export default function WatchVideos({ next }) {
         el.style.setProperty("--LinearProgress-progressThickness", "100%");
       });
     } else {
-      const newVal = Math.min((val / 3000) * 100, 100);
+      const newVal = (val / 3000) * 100;
       if (name == "leftLike") {
-        setLeftLikeAmt(newVal + leftLikeAmt);
+        setLeftLikeAmt(Math.min(newVal + leftLikeAmt, 100));
       } else if (name == "rightLike") {
-        setRightLikeAmt(newVal + rightLikeAmt);
+        setRightLikeAmt(Math.min(newVal + rightLikeAmt, 100));
       } else if (name == "leftDislike") {
-        setLeftDislikeAmt(newVal + leftDislikeAmt);
+        setLeftDislikeAmt(Math.min(newVal + leftDislikeAmt, 100));
       } else if (name == "rightDislike") {
-        setRightDislikeAmt(newVal + rightDislikeAmt);
+        setRightDislikeAmt(Math.min(newVal + rightDislikeAmt, 100));
       }
     }
   }

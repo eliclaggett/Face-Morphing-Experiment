@@ -44,7 +44,8 @@ const gameParams = {
   partialPay: 1,
   studyLength: "10 minutes",
   completionCode: "C19BSZ93",
-  livekitURL: "wss://facemorphing-pse030ak.livekit.cloud",
+  livekitURL: process.env['LIVEKIT_URL'],
+  morphingTarget: 'self',
 
   videos: {
     positive: [
@@ -138,6 +139,9 @@ const gameParams = {
     "neutral/9a54607c-02a3-48c6-ad11-02a5e27812de_0",
     "neutral/9a54607c-02a3-48c6-ad11-02a5e27812de_1",
   ],
+  maleFaces: ['2024-12-17_16-54-06.jpg', '2024-12-17_23-16-53.jpg', '2024-12-16_17-02-36.jpg', '2024-12-19_20-19-32.jpg', '2024-12-18_16-13-12.jpg', '2024-12-18_17-26-53.jpg', '2024-12-19_19-17-03.jpg', '2024-12-18_16-32-55.jpg', '2024-12-18_00-45-30.jpg', '2024-12-16_19-51-54.jpg', '2024-12-17_20-52-28.jpg', '2024-12-18_16-59-56.jpg', '2024-12-17_17-37-42.jpg', '2024-12-16_18-20-01.jpg'],
+  femaleFaces: ['2024-12-17_21-17-42.jpg', '2024-12-19_19-48-38.jpg', '2024-12-17_16-07-04.jpg', '2025-01-06_17-28-26.jpg', '2024-12-19_22-24-39.jpg', '2024-12-19_21-55-40.jpg', '2024-12-17_16-28-20.jpg', '2024-12-16_21-07-35.jpg', '2025-01-06_18-27-03.jpg', '2024-12-17_22-31-10.jpg', '2024-12-18_15-28-28.jpg', '2024-12-16_23-08-45.jpg', '2024-12-16_17-28-17.jpg', '2024-12-18_18-25-19.jpg'],
+  faceIdx: {male: 0, female: 0}
 };
 
 const id2Video = {
@@ -193,6 +197,30 @@ function shuffle(array) {
   }
 }
 
+// Run on startup
+// Check that our current faceIdx for male and female faces is stored in a file
+// If so, load it. Otherwise, create it
+const faceIdxPath = process.env["STORE_PATH"] + '/faceIdx.txt';
+if (fs.existsSync(faceIdxPath)) {
+  console.log('faceIdx file exists! reading...');
+  const data = fs.readFileSync(faceIdxPath, 'utf-8');
+  const lines = data.split('\n');
+  const maleVal = parseInt(lines[0].split(',')[1]);
+  const femaleVal = parseInt(lines[1].split(',')[1]);
+  gameParams['faceIdx'] = {male: maleVal, female: femaleVal};
+  console.log(gameParams['faceIdx']);
+} else {
+  console.log('faceIdx file not found! creating...');
+  try {
+    const content = 'male,0\nfemale,0';
+    fs.writeFileSync(faceIdxPath, content);
+    console.log(gameParams['faceIdx']);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+
 // Function that runs when the lobby timer runs out
 Empirica.onGameStart(({ game }) => {
   const round = game.addRound({
@@ -205,15 +233,35 @@ Empirica.onGameStart(({ game }) => {
   });
 
   game.set("gameParams", gameParams);
+
+  if (fs.existsSync(faceIdxPath)) {
+    console.log('faceIdx file exists! reading...');
+    const data = fs.readFileSync(faceIdxPath, 'utf-8');
+    const lines = data.split('\n');
+    const maleVal = parseInt(lines[0].split(',')[1]);
+    const femaleVal = parseInt(lines[1].split(',')[1]);
+    gameParams['faceIdx'] = {male: maleVal, female: femaleVal};
+    console.log(gameParams['faceIdx']);
+  } else {
+    console.log('faceIdx file not found! creating...');
+    try {
+      const content = 'male,0\nfemale,0';
+      fs.writeFileSync(faceIdxPath, content);
+      console.log(gameParams['faceIdx']);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 });
 
 // Called when a participant joins the experiment
-Empirica.on("player", (_, { player, _ }) => {
+Empirica.on("player", (ctx, { player, _ }) => {
   if (player.get("gameParams")) return;
   player.set("gameParams", gameParams);
   player.set("studyStep", "calibration");
   player.set("videoReactions", []);
   player.set("livekitURL", gameParams.livekitURL);
+  player.set('trialDt', (new Date()).getTime());
 
   // Final Survey
   let leftoverIndices = [];
@@ -242,51 +290,55 @@ Empirica.on("player", "gender", (ctx, { player, gender }) => {
   const playerGender = gender;
 
   const playerVideos = [];
-  const playerVideoIDs = [];
+  const orderedVideoIDs = [];
 
   // Randomize order of videos
-  const randomizedPositives = [0, 1, 2, 3, 4, 5, 6, 7];
-  const randomizedNeutrals = [0, 1, 2, 3, 4, 5, 6, 7];
-
-  shuffle(randomizedPositives);
-  shuffle(randomizedNeutrals);
-
-  // Randomize order of morphing levels
-  let randomizedPosMorphingLevel = [0, 1, 2, 3];
-  let randomizedNeuMorphingLevel = [0, 1, 2, 3];
-  shuffle(randomizedPosMorphingLevel);
-  shuffle(randomizedNeuMorphingLevel);
-  const randomizedMorphingLevel = randomizedPosMorphingLevel.concat(
-    randomizedNeuMorphingLevel
-  );
-
-  // Randomize left/right order
-  const randomizedMorphingLR = [];
-  const randomizedDisplayLR = [];
+  let randomPositiveVideos = [0,1,2,3,4,5,6,7];
+  let randomNegativeVideos = [0,1,2,3,4,5,6,7];
+  shuffle(randomPositiveVideos);
+  shuffle(randomNegativeVideos);
 
   for (let i = 0; i < 4; i++) {
-    playerVideoIDs.push(gameParams.videos["positive"][randomizedPositives[i]]);
+    orderedVideoIDs.push(gameParams.videos["positive"][randomPositiveVideos[i]]);
   }
 
   for (let i = 0; i < 4; i++) {
-    playerVideoIDs.push(gameParams.videos["neutral"][randomizedNeutrals[i]]);
+    orderedVideoIDs.push(gameParams.videos["neutral"][randomNegativeVideos[i]]);
   }
 
-  shuffle(playerVideoIDs);
+  // Randomize order of video sentiment and morphing level
+  const randomizedConditions = [0,1,2,3,4,5,6,7];
+  shuffle(randomizedConditions);
+
+  // Apply the condition indices to the randomizedMorphingLevel, playerVideoIDs
+  const randomizedVideoIDs = [];
+  const randomizedMorphingLevels = [];  
+  const orderedMorphingLevels = [0, 1, 2, 3, 0, 1, 2, 3];
+
+  for (let i = 0; i < randomizedConditions.length; i++) {
+    const idx = randomizedConditions[i];
+    randomizedVideoIDs.push(orderedVideoIDs[idx]);
+    randomizedMorphingLevels.push(orderedMorphingLevels[idx]);
+  }
 
   for (let i = 0; i < 8; i++) {
-    playerVideos.push(id2Video[playerVideoIDs[i]]);
+    playerVideos.push(id2Video[randomizedVideoIDs[i]]);
   }
+
+  // Only morph the gender-matched participants!
+  const randomizedMorphingLR = [];
+  // Randomize left/right order
+  const randomizedDisplayLR = [];
 
   for (let i = 0; i < 8; i++) {
     // NOTE: We no longer randomize morphing with either the left or right speaker. Now, we do it based on gender
     // randomizedMorphingLR.push(Math.round(Math.random()));
 
     let morphingLR = 0;
-    if (playerGender == gameParams["video_genders"][playerVideoIDs[i]][0]) {
+    if (playerGender == gameParams["video_genders"][randomizedVideoIDs[i]][0]) {
       morphingLR = 0;
     } else if (
-      playerGender == gameParams["video_genders"][playerVideoIDs[i]][1]
+      playerGender == gameParams["video_genders"][randomizedVideoIDs[i]][1]
     ) {
       morphingLR = 1;
     } else {
@@ -304,7 +356,7 @@ Empirica.on("player", "gender", (ctx, { player, gender }) => {
   }
 
   player.set("randomizedVideos", playerVideos);
-  player.set("randomizedMorphingLevel", randomizedMorphingLevel);
+  player.set("randomizedMorphingLevel", randomizedMorphingLevels);
   player.set("randomizedMorphingLR", randomizedMorphingLR);
   player.set("randomizedDisplayLR", randomizedDisplayLR);
 });
@@ -340,7 +392,6 @@ Empirica.on("player", "submitRecaptcha", (ctx, { player, submitRecaptcha }) => {
           player.set("passedRecaptcha", true);
           Empirica.flush(); // Allows asynchronous state updates
         } else {
-          console.log(respData);
           player.set("passedRecaptcha", false);
         }
       });
@@ -381,6 +432,20 @@ Empirica.on(
       Empirica.flush();
     }
     void init();
+  }
+);
+
+// Called when a player finishes the study
+Empirica.on(
+  "player",
+  "debriefingResults",
+  (ctx, { player, debriefingResults }) => {
+    const gender = player.get('gender');
+    gameParams['faceIdx'][gender] += 1;
+    console.log('Updating faceIdx...');
+    const newContent = 'male,'+gameParams['faceIdx']['male']+'\nfemale,'+gameParams['faceIdx']['female'];
+    fs.writeFileSync(faceIdxPath, newContent);
+    console.log(gameParams['faceIdx']);
   }
 );
 

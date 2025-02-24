@@ -30,6 +30,8 @@ import calibrationLight from "../assets/calibration_light.svg";
 export default function CalibrateTracking({ next }) {
   const player = usePlayer();
 
+  const trialDt = player.get('trialDt');
+
   const [calibrationPoints, setCalibrationPoints] = useState({});
   const [pointCalibrate, setPointCalibrate] = useState(0);
   const serverUrl = player.get("livekitURL");
@@ -183,7 +185,7 @@ export default function CalibrateTracking({ next }) {
   useEffect(() => {
     if (!token || token == "") player.set("requestLiveKitToken", true);
     window.webcamOn = false;
-    wsSend(JSON.stringify({ command: "startRecording" }));
+    wsSend(JSON.stringify({ command: "startRecording", trialDt: trialDt }));
     initializefaceDetector();
 
     if (hasGetUserMedia()) {
@@ -209,7 +211,7 @@ export default function CalibrateTracking({ next }) {
       document
         .querySelectorAll(".calibratingMsg")
         .forEach((el) => el.classList.remove("hidden"));
-      wsSend(JSON.stringify({ command: "captureFace" }));
+      wsSend(JSON.stringify({ command: "captureFace", trialDt: trialDt }));
     }
   };
 
@@ -242,7 +244,6 @@ export default function CalibrateTracking({ next }) {
       node.style.setProperty("background-color", "#ffd700");
       node.setAttribute("disabled", "disabled");
       PointCalibrate++;
-      console.log("finished point" + PointCalibrate);
     } else if (CalibrationPoints[id] < 3) {
       //Gradually increase the opacity of calibration points when click to give some indication to user.
       var opacity = 0.2 * CalibrationPoints[id] + 0.6;
@@ -271,7 +272,7 @@ export default function CalibrateTracking({ next }) {
     console.log("Connection successfully established with LiveKit");
   }
   function handleLivekitError(err) {
-    console.log("eli: livekit error");
+    console.log("Livekit error");
     console.log(err);
   }
 

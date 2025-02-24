@@ -24,6 +24,7 @@ export default function TestStep({ next }) {
   const serverUrl = player.get("livekitURL");
   const webcamRef = useRef(null);
   const token = player.get("liveKitToken");
+  const trialDt = player.get('trialDt');
   const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +45,6 @@ export default function TestStep({ next }) {
   window.nlpServer.onmessage = (msg) => {
     const data = JSON.parse(msg.data);
 
-    console.log(data);
     if (Object.keys(data).indexOf("received_projection") != -1) {
       document.querySelectorAll(".systemCheck .MuiCard-root").forEach((el) => {
         if (!el.classList.contains("statusVideo")) el.classList.remove("error");
@@ -103,8 +103,9 @@ export default function TestStep({ next }) {
       setNetworkIcon(<Help />);
       setServer1Icon(<Help />);
       setServer2Icon(<Help />);
-      wsSend(JSON.stringify({ command: "testConnection" }));
-      TimerMixin.setTimeout(collectTestResults, 9 * 1000);
+
+      TimerMixin.setTimeout(() => { wsSend(JSON.stringify({ command: "testConnection", trialDt: trialDt })); }, 1000);
+      TimerMixin.setTimeout(collectTestResults, 10 * 1000);
       TimerMixin.setTimeout(() => {
         setAlertDisplay("");
       }, 25 * 1000);
@@ -118,7 +119,7 @@ export default function TestStep({ next }) {
     setVideoIcon(<CheckCircle />);
   }
   function handleLivekitError(err) {
-    console.log("eli: livekit error");
+    console.log("Livekit error");
     console.log(err);
     setVideoIcon(<Error />);
     document.querySelector("statusVideo").classList.add("error");

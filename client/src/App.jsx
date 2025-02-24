@@ -12,6 +12,7 @@ import End from "./steps/exit/End.jsx";
 import TestStep from "./steps/TestStep.jsx";
 import ParticipantJoin from "./steps/onboarding/ParticipantJoin.jsx";
 import InitialSurvey from "./steps/onboarding/InitialSurvey.jsx";
+import TimerMixin from "react-timer-mixin";
 
 // Custom theme
 const theme = extendTheme({

@@ -31,6 +31,7 @@ export default function FinalDisclosure({ next }) {
   const [canShow, setCanShow] = useState(-1);
 
   const player = usePlayer();
+  const studyStep = player.get("studyStep");
 
   // Logic to handle interactions with this page
   function handleClickFinish() {
@@ -49,7 +50,7 @@ export default function FinalDisclosure({ next }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [studyStep]);
 
   // UI
   return (

@@ -112,6 +112,7 @@ export default function VideoRanking({ next }) {
   const vectorDistances = player.get("vectorDistances");
   const mostLikedPersonID = player.get("mostLikedPersonID") || false;
   const mostDislikedPersonID = player.get("mostDislikedPersonID") || false;
+  const trialDt = player.get('trialDt');
 
   let mostLikedPerson = null;
   let mostDislikedPerson = null;
@@ -257,7 +258,7 @@ export default function VideoRanking({ next }) {
   const correctlyRecognized = [];
 
   useEffect(() => {
-    wsSend(JSON.stringify({ command: "getLastVectorDistance" }));
+    wsSend(JSON.stringify({ command: "getLastVectorDistance", trialDt: trialDt }));
   }, []);
 
   let leftoverIdx = 0;
@@ -286,7 +287,7 @@ export default function VideoRanking({ next }) {
 
   const handleNext = () => {
     if (surveyStep == 2) {
-      wsSend(JSON.stringify({ command: "stopRecording" }));
+      wsSend(JSON.stringify({ command: "stopRecording", trialDt: trialDt }));
       player.set("surveyAnswers", {
         likedPersonalReason: likedPersonal,
         likedGeneralReason: likedGeneral,
