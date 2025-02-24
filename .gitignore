@@ -11,3 +11,4 @@ package-lock.json
 *.tar.gz
 *.tar.zst
 unused
+*.pem
