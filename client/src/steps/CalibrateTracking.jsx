@@ -293,7 +293,7 @@ export default function CalibrateTracking({ next }) {
             To calibrate the eye tracking system, please follow the instructions
             below.
             <br />
-            We cannot continue unless all requirements are met.
+            <b>Warning: If your face is not visible in the webcam stream, you will be asked to cancel your participation without pay.</b>
           </Typography>
 
           <Stack direction="row" justifyContent={"center"}>

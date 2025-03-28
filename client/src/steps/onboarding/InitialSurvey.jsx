@@ -68,11 +68,7 @@ export default function InitialSurvey({ next }) {
   const [rosenbergValues, setRosenbergValues] = useState({});
 
   const rosenbergSelfEsteemQuestionData = [
-    [
-      0,
-      "I feel that I am a person of worth, at least on an equal plane with others.",
-      1,
-    ],
+    [0, "I feel that I am a person of worth, at least on an equal plane with others.", 1],
     [1, "I feel that I have a number of good qualities.", 1],
     [2, "All in all, I am inclined to feel that I am a failure.", -1],
     [3, "I am able to do things as well as most other people.", 1],

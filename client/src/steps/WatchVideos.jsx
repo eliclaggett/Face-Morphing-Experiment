@@ -45,7 +45,6 @@ export default function WatchVideos({ next }) {
   const gameParams = game.get("gameParams");
   const gender = player.get('gender');
 
-
   const trialDt = player.get('trialDt');
   const randomizedVideos = player.get("randomizedVideos");
   const randomizedMorphingLevel = player.get("randomizedMorphingLevel");
@@ -54,8 +53,7 @@ export default function WatchVideos({ next }) {
   const videoReactions = player.get("videoReactions");
   const videoWatchTimes = player.get("videoWatchTimes") || [];
 
-  // const matchedFace = (gender == 'male') ? gameParams['maleFaces'][gameParams['faceIdx']['male']] : gameParams['femaleFaces'][gameParams['faceIdx']['female']];
-  
+  const matchedFace = (gender == 'male') ? gameParams['maleFaces'][gameParams['faceIdx']['male']] : gameParams['femaleFaces'][gameParams['faceIdx']['female']];
   // const matchedFace = '2024-12-18_18-25-19.jpg';
 
   const requiredWatchTime = gameParams?.videoLength
@@ -168,7 +166,7 @@ export default function WatchVideos({ next }) {
       document.querySelector("#webgazerFaceFeedbackBox").remove();
     }
 
-    // player.set('matchedFace', matchedFace);
+    player.set('matchedFace', matchedFace);
 
     return () => {
       clearInterval(intervalRef.current); // playbackFunc
@@ -268,7 +266,7 @@ export default function WatchVideos({ next }) {
         swap_idx: randomizedMorphingLR[videoIdx],
         morphing_level: morphingLevel,
         output_order: randomizedDisplayLR[videoIdx],
-        // use_face: matchedFace, // Only used for "other" condition
+        use_face: matchedFace, // Only used for "other" condition
         use_actor: 0, // 0=use participant's webcam
       })
     );

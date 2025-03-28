@@ -42,10 +42,10 @@ const gameParams = {
   numVideos: 8,
   studyPay: 2.4,
   partialPay: 1,
-  studyLength: "10 minutes",
+  studyLength: "20 minutes",
   completionCode: "C19BSZ93",
-  livekitURL: process.env['LIVEKIT_URL'],
-  morphingTarget: 'self',
+  livekitURL: process.env["LIVEKIT_URL"],
+  morphingTarget: "other",
 
   videos: {
     positive: [
@@ -139,9 +139,222 @@ const gameParams = {
     "neutral/9a54607c-02a3-48c6-ad11-02a5e27812de_0",
     "neutral/9a54607c-02a3-48c6-ad11-02a5e27812de_1",
   ],
-  maleFaces: ['2024-12-17_16-54-06.jpg', '2024-12-17_23-16-53.jpg', '2024-12-16_17-02-36.jpg', '2024-12-19_20-19-32.jpg', '2024-12-18_16-13-12.jpg', '2024-12-18_17-26-53.jpg', '2024-12-19_19-17-03.jpg', '2024-12-18_16-32-55.jpg', '2024-12-18_00-45-30.jpg', '2024-12-16_19-51-54.jpg', '2024-12-17_20-52-28.jpg', '2024-12-18_16-59-56.jpg', '2024-12-17_17-37-42.jpg', '2024-12-16_18-20-01.jpg'],
-  femaleFaces: ['2024-12-17_21-17-42.jpg', '2024-12-19_19-48-38.jpg', '2024-12-17_16-07-04.jpg', '2025-01-06_17-28-26.jpg', '2024-12-19_22-24-39.jpg', '2024-12-19_21-55-40.jpg', '2024-12-17_16-28-20.jpg', '2024-12-16_21-07-35.jpg', '2025-01-06_18-27-03.jpg', '2024-12-17_22-31-10.jpg', '2024-12-18_15-28-28.jpg', '2024-12-16_23-08-45.jpg', '2024-12-16_17-28-17.jpg', '2024-12-18_18-25-19.jpg'],
-  faceIdx: {male: 0, female: 0}
+  maleFaces: ['1741373853472'],
+  femaleFaces: ['1740763212136'],
+  faceIdx: { male: 0, female: 0 },
+};
+
+const faceLookup = {
+  1739917157902: {
+    randomizedVideos:
+      ["positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4"],
+    randomizedMorphingLevel: [3,0,2,0,3,2,1,1],
+    randomizedMorphingLR: [0,0,1,1,1,1,1,1],
+    randomizedDisplayLR: [0,1,0,1,0,1,1,1],
+  },
+  1739919585318: {
+    randomizedVideos:
+      ["neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4"],
+    randomizedMorphingLevel: [1,3,2,3,1,0,0,2],
+    randomizedMorphingLR: [0,1,0,1,1,1,0,0],
+    randomizedDisplayLR: [1,1,1,0,0,0,1,1],
+  },
+  1740519216711: {
+    randomizedVideos:
+      ["positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4"],
+    randomizedMorphingLevel: [3,0,2,3,0,1,1,2],
+    randomizedMorphingLR: [1,0,1,0,0,0,0,0],
+    randomizedDisplayLR: [1,0,0,0,0,0,0,1],
+  },
+  1740520599843: {
+    randomizedVideos:
+      ["positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4"],
+    randomizedMorphingLevel: [1,0,0,2,3,1,3,2],
+    randomizedMorphingLR: [0,1,1,0,1,0,0,1],
+    randomizedDisplayLR: [1,1,1,1,0,1,0,0],
+  },
+  1740529578081: {
+    randomizedVideos:
+      ["positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4"],
+    randomizedMorphingLevel: [2,1,0,1,3,0,3,2],
+    randomizedMorphingLR: [0,0,0,0,0,0,0,0],
+    randomizedDisplayLR: [0,1,1,0,1,1,0,0],
+  },
+  1740594759016: {
+    randomizedVideos:
+      ["neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4"],
+    randomizedMorphingLevel: [1,0,3,1,0,3,2,2],
+    randomizedMorphingLR: [0,0,1,0,0,0,0,1],
+    randomizedDisplayLR: [0,0,0,1,1,0,0,1],
+  },
+  1740605884308: {
+    randomizedVideos:
+      ["positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4"],
+    randomizedMorphingLevel: [3,3,1,2,0,1,0,2],
+    randomizedMorphingLR: [0,1,1,0,1,0,0,0],
+    randomizedDisplayLR: [1,0,1,1,0,1,1,1],
+  },
+  1740616119784: {
+    randomizedVideos:
+      ["neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4"],
+    randomizedMorphingLevel: [3,2,3,1,1,0,2,0],
+    randomizedMorphingLR: [0,0,1,1,0,0,1,1],
+    randomizedDisplayLR: [1,0,0,0,1,0,1,0],
+  },
+  1740687471857: {
+    randomizedVideos:
+      ["neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4"],
+    randomizedMorphingLevel: [1,3,1,2,2,0,3,0],
+    randomizedMorphingLR: [0,1,0,0,0,1,0,0],
+    randomizedDisplayLR: [1,1,1,0,0,0,1,1],
+  },
+  1740692714031: {
+    randomizedVideos:
+      ["neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4"],
+    randomizedMorphingLevel: [2,0,1,3,3,2,1,0],
+    randomizedMorphingLR: [0,0,1,0,0,0,0,0],
+    randomizedDisplayLR: [0,0,0,1,1,1,1,0],
+  },
+  1740763212136: {
+    randomizedVideos:
+      ["neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4"],
+    randomizedMorphingLevel: [3,1,0,1,3,0,2,2],
+    randomizedMorphingLR: [0,1,1,1,1,0,1,0],
+    randomizedDisplayLR: [1,1,1,1,0,0,1,0],
+  },
+  1740770503746: {
+    randomizedVideos:
+      ["neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4"],
+    randomizedMorphingLevel: [3,2,1,0,0,3,1,2],
+    randomizedMorphingLR: [1,1,1,1,0,0,1,1],
+    randomizedDisplayLR: [0,0,0,0,0,1,0,0],
+  },
+  1740780731689: {
+    randomizedVideos:
+      ["neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4"],
+    randomizedMorphingLevel: [3,0,1,2,0,1,3,2],
+    randomizedMorphingLR: [1,1,1,0,0,1,1,0],
+    randomizedDisplayLR: [0,1,1,1,0,0,1,1],
+  },
+  1740855055831: {
+    randomizedVideos:
+      ["neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4"],
+    randomizedMorphingLevel: [1,0,1,3,2,2,0,3],
+    randomizedMorphingLR: [1,1,1,1,0,0,1,1],
+    randomizedDisplayLR: [1,0,0,1,1,1,1,1],
+  },
+  1740857682036: {
+    randomizedVideos:
+      ["positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4"],
+    randomizedMorphingLevel: [2,1,2,1,0,3,3,0],
+    randomizedMorphingLR: [1,1,1,1,1,1,1,0],
+    randomizedDisplayLR: [0,0,0,1,0,1,1,0],
+  },
+  1740877043484: {
+    randomizedVideos:
+      ["positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4"],
+    randomizedMorphingLevel: [1,0,2,3,2,3,0,1],
+    randomizedMorphingLR: [1,0,0,0,0,0,0,0],
+    randomizedDisplayLR: [0,1,0,1,0,1,1,1],
+  },
+  1740948418515: {
+    randomizedVideos:
+      ["positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4"],
+    randomizedMorphingLevel: [0,0,2,1,2,1,3,3],
+    randomizedMorphingLR: [0,1,1,1,1,0,1,1],
+    randomizedDisplayLR: [1,0,1,1,0,1,1,1],
+  },
+  1740951861068: {
+    randomizedVideos:
+      ["positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4"],
+    randomizedMorphingLevel: [1,2,0,3,2,0,1,3],
+    randomizedMorphingLR: [0,0,0,1,1,1,1,1],
+    randomizedDisplayLR: [1,1,1,1,1,1,0,1],
+  },
+  1741110022340: {
+    randomizedVideos:
+      ["positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4"],
+    randomizedMorphingLevel: [3,2,2,1,1,3,0,0],
+    randomizedMorphingLR: [0,1,1,1,1,1,1,1],
+    randomizedDisplayLR: [0,0,1,1,0,1,0,1],
+  },
+  1741113578591: {
+    randomizedVideos:
+      ["positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4"],
+    randomizedMorphingLevel: [1,3,2,0,2,3,1,0],
+    randomizedMorphingLR: [0,1,0,1,1,1,1,0],
+    randomizedDisplayLR: [0,1,0,0,1,0,1,0],
+  },
+  1741120422659: {
+    randomizedVideos:
+      ["neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4"],
+    randomizedMorphingLevel: [1,3,3,1,2,0,2,0],
+    randomizedMorphingLR: [1,1,1,1,1,1,0,0],
+    randomizedDisplayLR: [0,0,0,0,1,0,0,0],
+  },
+  1741125894927: {
+    randomizedVideos:
+      ["neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4"],
+    randomizedMorphingLevel: [2,1,3,1,0,3,2,0],
+    randomizedMorphingLR: [1,1,1,1,1,1,0,1],
+    randomizedDisplayLR: [1,1,0,0,0,0,1,1],
+  },
+  1741133814494: {
+    randomizedVideos:
+      ["neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4"],
+    randomizedMorphingLevel: [0,3,0,2,3,1,1,2],
+    randomizedMorphingLR: [1,0,1,1,1,0,1,1],
+    randomizedDisplayLR: [1,0,0,0,1,1,1,0],
+  },
+  1741277300084: {
+    randomizedVideos:
+      ["positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","positive/ac78bc80-4f3a-481a-91e6-213bc427c0b3.mp4"],
+    randomizedMorphingLevel: [1,0,3,1,2,3,0,2],
+    randomizedMorphingLR: [0,1,1,1,0,1,0,1],
+    randomizedDisplayLR: [1,0,1,0,1,0,0,0],
+  },
+  1741285916587: {
+    randomizedVideos:
+      ["neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4"],
+    randomizedMorphingLevel: [0,1,0,2,3,3,1,2],
+    randomizedMorphingLR: [1,1,1,0,1,1,1,1],
+    randomizedDisplayLR: [0,0,0,0,0,0,0,0],
+  },
+  1741291518279: {
+    randomizedVideos:
+      ["neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","neutral/43a0eb07-4a0c-4766-bdcf-00eb87dfbb5d.mp4"],
+    randomizedMorphingLevel: [3,1,1,2,0,0,3,2],
+    randomizedMorphingLR: [0,0,0,1,0,0,1,0],
+    randomizedDisplayLR: [1,1,1,0,1,0,1,0],
+  },
+  1741305997980: {
+    randomizedVideos:
+      ["neutral/9a54607c-02a3-48c6-ad11-02a5e27812de.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4"],
+    randomizedMorphingLevel: [1,0,3,2,0,2,1,3],
+    randomizedMorphingLR: [0,0,1,1,1,0,1,0],
+    randomizedDisplayLR: [1,0,1,1,1,1,1,0],
+  },
+  1741365581670: {
+    randomizedVideos:
+      ["neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","positive/1fdf2fcf-746c-446e-a3fa-d70fbbf3e2c6.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","neutral/ff6acf35-cfce-4d87-b04e-2bf91f1926ba.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","positive/718d778c-d62e-463a-97cd-d6d3550d19a3.mp4"],
+    randomizedMorphingLevel: [3,0,2,1,0,2,1,3],
+    randomizedMorphingLR: [0,1,1,1,0,0,0,0],
+    randomizedDisplayLR: [0,1,1,0,0,1,0,1],
+  },
+  1741373853472: {
+    randomizedVideos:
+      ["positive/fcb7689a-5614-475c-9ea8-493fbe045499.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4","neutral/2d8791a3-3ad0-4011-bdc1-2dde05ebcba2.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4"],
+    randomizedMorphingLevel: [2,0,1,3,1,2,0,3],
+    randomizedMorphingLR: [0,1,1,0,1,0,0,0],
+    randomizedDisplayLR: [1,0,1,0,0,0,0,1],
+  },
+  1741481568218: {
+    randomizedVideos:
+      ["positive/ddbd8c9d-1dc5-45ae-b8e4-7a5d1e266748.mp4","neutral/3504e22c-1e69-4e99-928b-f8541539d888.mp4","positive/d9e1f5a5-e4eb-43df-910b-d9ae2befb039.mp4","neutral/94a3c6b5-46d5-4d3c-9616-1cc0e5a21e9e.mp4","neutral/a373174c-cade-4c7f-a3d6-7309f225f37d.mp4","positive/65ef52f0-93a4-435c-ae13-ab502aa60bd7.mp4","positive/5348de6b-afa5-4c36-8087-cd3bf94eedfd.mp4","neutral/e14e94f7-2550-4f38-b9ba-ebe4958e0512.mp4"],
+    randomizedMorphingLevel: [0,0,3,2,3,2,1,1],
+    randomizedMorphingLR: [0,0,1,0,0,1,1,1],
+    randomizedDisplayLR: [1,0,1,1,1,0,1,0],
+  },
 };
 
 const id2Video = {
@@ -200,26 +413,25 @@ function shuffle(array) {
 // Run on startup
 // Check that our current faceIdx for male and female faces is stored in a file
 // If so, load it. Otherwise, create it
-const faceIdxPath = process.env["STORE_PATH"] + '/faceIdx.txt';
+const faceIdxPath = process.env["STORE_PATH"] + "/faceIdx.txt";
 if (fs.existsSync(faceIdxPath)) {
-  console.log('faceIdx file exists! reading...');
-  const data = fs.readFileSync(faceIdxPath, 'utf-8');
-  const lines = data.split('\n');
-  const maleVal = parseInt(lines[0].split(',')[1]);
-  const femaleVal = parseInt(lines[1].split(',')[1]);
-  gameParams['faceIdx'] = {male: maleVal, female: femaleVal};
-  console.log(gameParams['faceIdx']);
+  console.log("faceIdx file exists! reading...");
+  const data = fs.readFileSync(faceIdxPath, "utf-8");
+  const lines = data.split("\n");
+  const maleVal = parseInt(lines[0].split(",")[1]);
+  const femaleVal = parseInt(lines[1].split(",")[1]);
+  gameParams["faceIdx"] = { male: maleVal, female: femaleVal };
+  console.log(gameParams["faceIdx"]);
 } else {
-  console.log('faceIdx file not found! creating...');
+  console.log("faceIdx file not found! creating...");
   try {
-    const content = 'male,0\nfemale,0';
+    const content = "male,0\nfemale,0";
     fs.writeFileSync(faceIdxPath, content);
-    console.log(gameParams['faceIdx']);
+    console.log(gameParams["faceIdx"]);
   } catch (err) {
     console.error(err);
   }
 }
-
 
 // Function that runs when the lobby timer runs out
 Empirica.onGameStart(({ game }) => {
@@ -235,19 +447,19 @@ Empirica.onGameStart(({ game }) => {
   game.set("gameParams", gameParams);
 
   if (fs.existsSync(faceIdxPath)) {
-    console.log('faceIdx file exists! reading...');
-    const data = fs.readFileSync(faceIdxPath, 'utf-8');
-    const lines = data.split('\n');
-    const maleVal = parseInt(lines[0].split(',')[1]);
-    const femaleVal = parseInt(lines[1].split(',')[1]);
-    gameParams['faceIdx'] = {male: maleVal, female: femaleVal};
-    console.log(gameParams['faceIdx']);
+    console.log("faceIdx file exists! reading...");
+    const data = fs.readFileSync(faceIdxPath, "utf-8");
+    const lines = data.split("\n");
+    const maleVal = parseInt(lines[0].split(",")[1]);
+    const femaleVal = parseInt(lines[1].split(",")[1]);
+    gameParams["faceIdx"] = { male: maleVal, female: femaleVal };
+    console.log(gameParams["faceIdx"]);
   } else {
-    console.log('faceIdx file not found! creating...');
+    console.log("faceIdx file not found! creating...");
     try {
-      const content = 'male,0\nfemale,0';
+      const content = "male,0\nfemale,0";
       fs.writeFileSync(faceIdxPath, content);
-      console.log(gameParams['faceIdx']);
+      console.log(gameParams["faceIdx"]);
     } catch (err) {
       console.error(err);
     }
@@ -261,7 +473,7 @@ Empirica.on("player", (ctx, { player, _ }) => {
   player.set("studyStep", "calibration");
   player.set("videoReactions", []);
   player.set("livekitURL", gameParams.livekitURL);
-  player.set('trialDt', (new Date()).getTime());
+  player.set("trialDt", new Date().getTime());
 
   // Final Survey
   let leftoverIndices = [];
@@ -285,80 +497,111 @@ Empirica.on("player", (ctx, { player, _ }) => {
   player.set("randomizedSeenIndices", randomizedSeenIndices);
 });
 
-
 Empirica.on("player", "gender", (ctx, { player, gender }) => {
   const playerGender = gender;
 
-  const playerVideos = [];
-  const orderedVideoIDs = [];
+  let playerVideos = [];
+  let orderedVideoIDs = [];
+  let randomizedMorphingLevels = [];
+  let randomizedMorphingLR = [];
+  let randomizedDisplayLR = [];
 
-  // Randomize order of videos
-  let randomPositiveVideos = [0,1,2,3,4,5,6,7];
-  let randomNegativeVideos = [0,1,2,3,4,5,6,7];
-  shuffle(randomPositiveVideos);
-  shuffle(randomNegativeVideos);
+  if (gameParams.morphingTarget == "self") {
+    // Randomize order of videos
+    let randomPositiveVideos = [0, 1, 2, 3, 4, 5, 6, 7];
+    let randomNegativeVideos = [0, 1, 2, 3, 4, 5, 6, 7];
+    shuffle(randomPositiveVideos);
+    shuffle(randomNegativeVideos);
 
-  for (let i = 0; i < 4; i++) {
-    orderedVideoIDs.push(gameParams.videos["positive"][randomPositiveVideos[i]]);
-  }
-
-  for (let i = 0; i < 4; i++) {
-    orderedVideoIDs.push(gameParams.videos["neutral"][randomNegativeVideos[i]]);
-  }
-
-  // Randomize order of video sentiment and morphing level
-  const randomizedConditions = [0,1,2,3,4,5,6,7];
-  shuffle(randomizedConditions);
-
-  // Apply the condition indices to the randomizedMorphingLevel, playerVideoIDs
-  const randomizedVideoIDs = [];
-  const randomizedMorphingLevels = [];  
-  const orderedMorphingLevels = [0, 1, 2, 3, 0, 1, 2, 3];
-
-  for (let i = 0; i < randomizedConditions.length; i++) {
-    const idx = randomizedConditions[i];
-    randomizedVideoIDs.push(orderedVideoIDs[idx]);
-    randomizedMorphingLevels.push(orderedMorphingLevels[idx]);
-  }
-
-  for (let i = 0; i < 8; i++) {
-    playerVideos.push(id2Video[randomizedVideoIDs[i]]);
-  }
-
-  // Only morph the gender-matched participants!
-  const randomizedMorphingLR = [];
-  // Randomize left/right order
-  const randomizedDisplayLR = [];
-
-  for (let i = 0; i < 8; i++) {
-    // NOTE: We no longer randomize morphing with either the left or right speaker. Now, we do it based on gender
-    // randomizedMorphingLR.push(Math.round(Math.random()));
-
-    let morphingLR = 0;
-    if (playerGender == gameParams["video_genders"][randomizedVideoIDs[i]][0]) {
-      morphingLR = 0;
-    } else if (
-      playerGender == gameParams["video_genders"][randomizedVideoIDs[i]][1]
-    ) {
-      morphingLR = 1;
-    } else {
-      morphingLR = Math.round(Math.random());
+    for (let i = 0; i < 4; i++) {
+      orderedVideoIDs.push(
+        gameParams.videos["positive"][randomPositiveVideos[i]]
+      );
     }
-    randomizedMorphingLR.push(morphingLR);
-    randomizedDisplayLR.push(Math.round(Math.random()));
-  }
 
-  const seenPpl = [];
-  for (const vidName of playerVideos) {
-    const idx = gameParams["stillMapTxt"].indexOf(vidName.slice(0, -4) + "_0");
-    seenPpl.push(idx);
-    seenPpl.push(idx + 1);
-  }
+    for (let i = 0; i < 4; i++) {
+      orderedVideoIDs.push(
+        gameParams.videos["neutral"][randomNegativeVideos[i]]
+      );
+    }
 
-  player.set("randomizedVideos", playerVideos);
-  player.set("randomizedMorphingLevel", randomizedMorphingLevels);
-  player.set("randomizedMorphingLR", randomizedMorphingLR);
-  player.set("randomizedDisplayLR", randomizedDisplayLR);
+    // Randomize order of video sentiment and morphing level
+    const randomizedConditions = [0, 1, 2, 3, 4, 5, 6, 7];
+    shuffle(randomizedConditions);
+
+    // Apply the condition indices to the randomizedMorphingLevel, playerVideoIDs
+    const randomizedVideoIDs = [];
+    randomizedMorphingLevels = [];
+    const orderedMorphingLevels = [0, 1, 2, 3, 0, 1, 2, 3];
+
+    for (let i = 0; i < randomizedConditions.length; i++) {
+      const idx = randomizedConditions[i];
+      randomizedVideoIDs.push(orderedVideoIDs[idx]);
+      randomizedMorphingLevels.push(orderedMorphingLevels[idx]);
+    }
+
+    for (let i = 0; i < 8; i++) {
+      playerVideos.push(id2Video[randomizedVideoIDs[i]]);
+    }
+
+    // Only morph the gender-matched participants!
+    randomizedMorphingLR = [];
+    // Randomize left/right order
+    randomizedDisplayLR = [];
+
+    for (let i = 0; i < 8; i++) {
+      // NOTE: We no longer randomize morphing with either the left or right speaker. Now, we do it based on gender
+      // randomizedMorphingLR.push(Math.round(Math.random()));
+
+      let morphingLR = 0;
+      if (
+        playerGender == gameParams["video_genders"][randomizedVideoIDs[i]][0]
+      ) {
+        morphingLR = 0;
+      } else if (
+        playerGender == gameParams["video_genders"][randomizedVideoIDs[i]][1]
+      ) {
+        morphingLR = 1;
+      } else {
+        morphingLR = Math.round(Math.random());
+      }
+      randomizedMorphingLR.push(morphingLR);
+      randomizedDisplayLR.push(Math.round(Math.random()));
+    }
+
+    const seenPpl = [];
+    for (const vidName of playerVideos) {
+      const idx = gameParams["stillMapTxt"].indexOf(
+        vidName.slice(0, -4) + "_0"
+      );
+      seenPpl.push(idx);
+      seenPpl.push(idx + 1);
+    }
+
+    player.set("randomizedVideos", playerVideos);
+    player.set("randomizedMorphingLevel", randomizedMorphingLevels);
+    player.set("randomizedMorphingLR", randomizedMorphingLR);
+    player.set("randomizedDisplayLR", randomizedDisplayLR);
+  } else {
+    const matchedFace =
+      gender == "male"
+        ? gameParams["maleFaces"][gameParams["faceIdx"]["male"]]
+        : gameParams["femaleFaces"][gameParams["faceIdx"]["female"]];
+
+    player.set("randomizedVideos", faceLookup[matchedFace]["randomizedVideos"]);
+    player.set(
+      "randomizedMorphingLevel",
+      faceLookup[matchedFace]["randomizedMorphingLevel"]
+    );
+    player.set(
+      "randomizedMorphingLR",
+      faceLookup[matchedFace]["randomizedMorphingLR"]
+    );
+    player.set(
+      "randomizedDisplayLR",
+      faceLookup[matchedFace]["randomizedDisplayLR"]
+    );
+  }
 });
 
 // Called when a participant submits the reCAPTCHA
@@ -440,12 +683,16 @@ Empirica.on(
   "player",
   "debriefingResults",
   (ctx, { player, debriefingResults }) => {
-    const gender = player.get('gender');
-    gameParams['faceIdx'][gender] += 1;
-    console.log('Updating faceIdx...');
-    const newContent = 'male,'+gameParams['faceIdx']['male']+'\nfemale,'+gameParams['faceIdx']['female'];
+    const gender = player.get("gender");
+    gameParams["faceIdx"][gender] += 1;
+    console.log("Updating faceIdx...");
+    const newContent =
+      "male," +
+      gameParams["faceIdx"]["male"] +
+      "\nfemale," +
+      gameParams["faceIdx"]["female"];
     fs.writeFileSync(faceIdxPath, newContent);
-    console.log(gameParams['faceIdx']);
+    console.log(gameParams["faceIdx"]);
   }
 );
 
